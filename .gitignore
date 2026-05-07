@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Google Cloud Credentials
+client_secret_*.json
+google-credentials.json
+adroit-particle-*.json
