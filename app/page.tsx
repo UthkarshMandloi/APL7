@@ -95,6 +95,13 @@ export default function Home() {
     }
   }, [isRecording, transcript]);
 
+  // Live typing effect while speaking
+  useEffect(() => {
+    if (isRecording && transcript) {
+      setInputText(transcript);
+    }
+  }, [transcript, isRecording]);
+
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#050509]">
       {/* Z-Index 0: 3D Background */}
@@ -246,7 +253,7 @@ export default function Home() {
               onClick={toggleRecording}
               className={`p-4 rounded-full transition-all duration-300 ${
                 isRecording 
-                  ? 'bg-cyan-500/20 neon-glow-active text-cyan-400 border border-cyan-400/50' 
+                  ? 'bg-cyan-500/20 neon-glow-active text-cyan-400 border border-cyan-400/50 animate-pulse' 
                   : 'bg-white/10 text-white hover:bg-white/20'
               }`}
             >

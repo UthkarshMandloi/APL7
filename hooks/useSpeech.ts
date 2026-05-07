@@ -42,7 +42,11 @@ export function useSpeech() {
 
       recognitionRef.current.onerror = (event: any) => {
         console.error("Speech recognition error:", event.error);
-        setMicError(event.error);
+        if (event.error === 'no-speech') {
+          setMicError("No speech detected. Click mic to try again.");
+        } else {
+          setMicError(event.error);
+        }
         setIsRecording(false);
       };
 
@@ -134,7 +138,7 @@ export function useSpeech() {
   // Provide a way for R3F to get the current audio level without re-rendering
   const getAudioLevel = useCallback(() => {
     if (analyserRef.current && dataArrayRef.current) {
-      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+      analyserRef.current.getByteFrequencyData(dataArrayRef.current as any);
       // Calculate average volume
       let sum = 0;
       for (let i = 0; i < dataArrayRef.current.length; i++) {
